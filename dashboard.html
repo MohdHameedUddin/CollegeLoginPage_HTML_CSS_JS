@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <header>
+        <img src="header.jpg" alt="">
+    </header>
+    <!-- <div class="container">
+        <div class="header">
+            <img src="lords symbol.png" alt="Lords Symbol" class="logo">
+            <h3>Dashboard</h3>
+        </div> -->
+
+        <div class="navbar">
+            <!-- <h3>Select Your Option</h3> -->
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="#">Results</a>
+                    <ul>
+                        <li><a href="semester1.html">Semester 1</a></li>
+                        <li><a href="semester2.html">Semester 2</a></li>
+                        <!-- Add more result sub-options as needed -->
+                    </ul>
+                </li>
+                <li><a href="#">Attendance</a>
+                    <ul>
+                        <li><a href="#">View Overall Attendance</a></li>
+                        <li><a href="#">Attendance by Subject</a></li>
+                        <!-- Add more attendance sub-options as needed -->
+                    </ul>
+                </li>
+                <li><a href="#">Achievements</a>
+                    <ul>
+                        <li><a href="#">Academic Awards</a></li>
+                        <li><a href="#">Extracurricular Achievements</a></li>
+                        <!-- Add more achievement sub-options as needed -->
+                    </ul>
+                </li>
+                <li><a href="index.html">Logout</a></li>
+                <!-- Add more links as needed -->
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- ... (rest of your HTML remains the same) ... -->
+
+<li><a href="semester1.html" onclick="fetchImage('160922750105-be.png')">Semester 1</a></li>
+
+<!-- ... (rest of your HTML remains the same) ... -->
+
+<script src="https://cdn.jsdelivr.net/npm/firebase@8.2.1/firebase-app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/firebase@8.2.1/firebase-storage.js"></script>
+
+<script>
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyD6smNVMivli9tTaFYQV26u5lXuNXnjgko",
+  authDomain: "marksheets-a4575.firebaseapp.com",
+  databaseURL: "https://marksheets-a4575-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "marksheets-a4575",
+  storageBucket: "marksheets-a4575.appspot.com",
+  messagingSenderId: "637758141379",
+  appId: "1:637758141379:web:13243a6e4fcffdea1d4376",
+  measurementId: "G-HPS500N1DN"
+};
+
+  function fetchImage(imageName) {
+    var storageRef = firebase.storage().ref('marksheet-images/' + imageName);
+    storageRef.getDownloadURL().then(function(url) {
+      var img = document.createElement('img');
+      img.src = url;
+      document.body.appendChild(img);
+    }).catch(function(error) {
+      console.error('Error fetching image:', error);
+    });
+  }
+</script>

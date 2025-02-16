@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semester 1 Results</title>
+    <!-- Include Firebase library -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-storage.js"></script>
+    <!-- Initialize Firebase with your configuration -->
+    <script>
+      // Your Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyD6smNVMivli9tTaFYQV26u5lXuNXnjgko",
+        authDomain: "marksheets-a4575.firebaseapp.com",
+        databaseURL: "https://marksheets-a4575-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "marksheets-a4575",
+        storageBucket: "marksheets-a4575.appspot.com",
+        messagingSenderId: "637758141379",
+        appId: "1:637758141379:web:13243a6e4fcffdea1d4376",
+        measurementId: "G-HPS500N1DN"
+      };
+
+      // Initialize Firebase and then run the code
+      firebase.initializeApp(firebaseConfig).then(() => {
+          // Your code that uses Firebase goes here
+          function fetchImage(imageName) {
+              const storageRef = firebase.storage().ref('marksheet-images/' + imageName);
+              storageRef.getDownloadURL()
+                  .then(url => {
+                      const img = document.getElementById('marksheet-image');
+                      img.src = url;
+                  })
+                  .catch(error => {
+                      console.error('Error fetching image:', error);
+                  });
+          }
+      });
+    </script>
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <h1>Semester 1 Results</h1>
+    <!-- Add content for Semester 1 results here -->
+
+    <!-- Button to fetch and display marksheet image -->
+    <button onclick="fetchImage('160922750105-be.png')">Get Marksheet</button>
+
+    <!-- Display marksheet image -->
+    <img id="marksheet-image" src="" alt="Marksheet Image">
+
+    <!-- Your other HTML content goes here -->
+</body>
+</html>

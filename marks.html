@@ -1,0 +1,136 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Marksheet Retrieval</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e8f0fe;
+      color: #212121;
+      margin: 0;
+      padding: 0;
+    }
+
+    #marksheet-container {
+      display: none;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+   .marksheet-image {
+      max-width: 100%;
+      height: auto;
+      margin: 10px;
+    }
+
+    input,
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    input {
+      background-color: #f2f2f2;
+    }
+
+    button {
+      background-color: #2196F3;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0D47A1;
+    }
+  </style>
+</head>
+<body>
+
+  <input type="text" id="rollno" placeholder="Enter Roll Number">
+  <button id="fetch-marksheet">Fetch Marksheet</button>
+
+  <div id="marksheet-container" style="display: none;">
+    <h2>SSC Marksheet</h2>
+    <img class="marksheet-image" id="ssc-marksheet-image" src="">
+    <h2>INTER Marksheet</h2>
+    <img class="marksheet-image" id="inter-marksheet-image" src="">
+    <h2>BE Marksheet</h2>
+    <img class="marksheet-image" id="be-marksheet-image" src="">
+  </div>
+
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyD6smNVMivli9tTaFYQV26u5lXuNXnjgko",
+      authDomain: "marksheets-a4575.firebaseapp.com",
+      databaseURL: "https://marksheets-a4575-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "marksheets-a4575",
+      storageBucket: "marksheets-a4575.appspot.com",
+      messagingSenderId: "637758141379",
+      appId: "1:637758141379:web:13243a6e4fcffdea1d4376",
+      measurementId: "G-HPS500N1DN"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const analytics = firebase.analytics(app);
+
+    // Get the input field and button elements
+    const rollnoInput = document.getElementById('rollno');
+    const fetchButton = document.getElementById('fetch-marksheet');
+    const marksheetContainer = document.getElementById('marksheet-container');
+    const sscMarkSheetImage = document.getElementById('ssc-marksheet-image');
+    const interMarkSheetImage = document.getElementById('inter-marksheet-image');
+    const beMarkSheetImage = document.getElementById('be-marksheet-image');
+
+    // Firebase Storage reference
+    const storageRef = firebase.storage().ref();
+
+    // Add event listener to the fetch button
+    fetchButton.addEventListener('click', () => {
+      const rollno = rollnoInput.value.trim();
+      if (rollno) {
+        // Create references to the marksheet images in Firebase Storage
+        const sscImageRef = storageRef.child(`marksheet-images/${rollno}-ssc.png`);
+        const interImageRef = storageRef.child(`marksheet-images/${rollno}-inter.png`);
+        const beImageRef = storageRef.child(`marksheet-images/${rollno}-be.png`);
+
+        // Get the download URLs of the images
+        Promise.all([
+          sscImageRef.getDownloadURL(),
+          interImageRef.getDownloadURL(),
+          beImageRef.getDownloadURL()
+        ]).then((urls) => {
+          // Set the src attributes of the image elements to the download URLs
+          sscMarkSheetImage.src = urls[0];
+          interMarkSheetImage.src = urls[1];
+          beMarkSheetImage.src = urls[2];
+          // ...existing script...
+
+
+// Display the marksheet container
+          marksheetContainer.style.display = 'block';
+        }).catch((error) => {
+          console.error('Error fetching marksheet images:', error);
+          marksheetContainer.style.display = 'none';
+        });
+      } else {
+        alert('Please enter a valid roll number');
+      }
+    });
+  </script>
+
+</body>
+</html> -->
